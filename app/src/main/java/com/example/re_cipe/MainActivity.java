@@ -26,12 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            RecipeDTO x = RecipeDAO.getItem();
-            System.out.println(x.getDescription());
-        } catch (Exception e) {
-            System.out.println("NIE PYK PYK");
-        }
         cards = new ArrayList<Card>();
         cards.add(new Card("php","https://www.monsieur-cuisine.com/fileadmin/_processed_/5/0/csm_23148_Rezeptfoto_01_21d2e4280f.jpg"));
         cards.add(new Card("c", "https://www.mojewypieki.com/img/images/original/Lody_z_czerwonej_pomara%C5%84czy_2022.jpg"));
@@ -71,7 +65,14 @@ public class MainActivity extends AppCompatActivity {
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
                 //TODO:
                 // Ask for more data here
-                cards.add(new Card("XML ".concat(String.valueOf(i)),"https://github.com/bumptech/glide/raw/master/static/glide_logo.png"));
+
+                try {
+                    RecipeDTO x = RecipeDAO.getItem();
+                    cards.add(new Card(x.getName(), x.getImageUrl()));
+                } catch (Exception e) {
+                    System.out.println("NIE PYK PYK");
+                }
+
                 cardAdapter.notifyDataSetChanged();
                 Log.d("LIST", "notified");
                 i++;
