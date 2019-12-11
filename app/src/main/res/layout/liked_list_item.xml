@@ -5,16 +5,30 @@
     android:orientation="horizontal"
     android:padding="20sp">
 
-    <ImageView
-        android:layout_width="50sp"
-        android:layout_height="50sp"
-        android:id="@+id/liked_list_image"/>
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:textSize="30sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/liked_list_text"/>
+        android:layout_height="50dp"
+        android:background="#AA000000">
+
+        <ImageView
+            android:id="@+id/liked_list_image"
+            android:layout_width="match_parent"
+            android:layout_height="50sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/light_font"
+            android:shadowColor="@color/text_shadow"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            android:id="@+id/liked_list_text"
+            android:padding="5sp"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>

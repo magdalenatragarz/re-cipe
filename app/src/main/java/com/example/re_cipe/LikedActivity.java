@@ -1,4 +1,4 @@
-package com.example.re_cipe.activities;
+package com.example.re_cipe;
 
 import android.os.Bundle;
 

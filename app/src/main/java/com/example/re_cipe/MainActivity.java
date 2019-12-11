@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.re_cipe.activities.LikedActivity;
+import com.example.re_cipe.activities.LikedListActivity;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
@@ -88,14 +88,18 @@ public class MainActivity extends AppCompatActivity {
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
-                goToLiked();
+                goToLikedList();
             }
 
         });
 
 
     }
-
+    public void goToLikedList (){
+        Intent intent = new Intent(MainActivity.this, LikedListActivity.class);
+        startActivity(intent);
+        return;
+    }
     public void goToLiked (){
         Intent intent = new Intent(MainActivity.this, LikedActivity.class);
         startActivity(intent);
