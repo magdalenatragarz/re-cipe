@@ -27,9 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         cards = new ArrayList<Card>();
-        cards.add(new Card("php","https://www.monsieur-cuisine.com/fileadmin/_processed_/5/0/csm_23148_Rezeptfoto_01_21d2e4280f.jpg"));
-        cards.add(new Card("c", "https://www.mojewypieki.com/img/images/original/Lody_z_czerwonej_pomara%C5%84czy_2022.jpg"));
-
+        
         cardAdapter = new CardAdapter(this, R.layout.item, cards);
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
@@ -63,14 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
-                //TODO:
-                // Ask for more data here
 
                 try {
-                    RecipeDTO x = RecipeDAO.getItem();
-                    cards.add(new Card(x.getName(), x.getImageUrl()));
+                    for (i=0; i<5; i++) {
+                        cards.add(new Card(RecipeDAO.getItem()));
+                    }
                 } catch (Exception e) {
-                    System.out.println("NIE PYK PYK");
+                    System.out.println(e.getMessage());
                 }
 
                 cardAdapter.notifyDataSetChanged();
