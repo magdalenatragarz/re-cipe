@@ -21,14 +21,24 @@ public class MainActivity extends AppCompatActivity {
     ListView cardView;
     List<Card> cards;
 
+    RecipesDB db = new RecipesDB(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         cards = new ArrayList<Card>();
-        cards.add(new Card("php","https://www.monsieur-cuisine.com/fileadmin/_processed_/5/0/csm_23148_Rezeptfoto_01_21d2e4280f.jpg"));
-        cards.add(new Card("c", "https://www.mojewypieki.com/img/images/original/Lody_z_czerwonej_pomara%C5%84czy_2022.jpg"));
+
+        cards.add(new Card("Chicken Milanese",
+                "https://spoonacular.com/recipeImages/618410-556x370.jpg",
+                "2 cups arugula/n1-1 1/2 lb. organic chicken breasts/n1/4 cup coconut flour/n2 organic, pasture-raised eggs/n1/4 cup ground flaxseed/n1/2 lemon juiced/n2-3 tbsp oil (I like avocado oil for high heat cooking)/n1/2 tbsp extra-virgin olive oil/nOptional: freshly grated parmesan cheese/nDash freshly ground pepper/nDash Himalayan sea salt/nDash Himalayan sea salt and freshly ground pepper/n1/2 cup tapioca flour/n1 cup tomatoes, chopped/n",
+                "In a bowl combine flours, salt, and pepperIn a separate bowl whisk together eggsDip sliced chicken breasts into egg, then dredge in flour mixture- repeat until all chicken is coatedIn a large skillet, heat oil until hotPlace chicken in the skillet and let fry for 5-8 minutes on each side, depending on thicknessFry until chicken is crispy and golden, but juicy in the centerToss arugula and tomatoes with oil, lemon, salt, and pepper- add in optional parmesan and serve"));
+
+        cards.add(new Card("Crock-Pot Beef Fajitas",
+                "https://spoonacular.com/recipeImages/617472-556x370.jpg",
+                "1 Teaspoon Chili Powder/n1 Tablespoon Cilantro, Chopped/n1.5 to 2 Lbs. Flank Steak, Sliced Thin/n2 Cloves Garlic, Minced/n2 Green Bell Peppers Sliced/n1 Teaspoon Ground Coriander/n1 Teaspoon Ground Cumin/n1 Jalapeno Pepper, Seeded And Chopped/n",
+                "Add all ingredients to a 6 quart crock-pot and give everything a quick stir to mix the spices around.Cover and cook on LOW for 8  9 hours.Serve on flour or corn tortillas with your favorite toppings."));
 
         cardAdapter = new CardAdapter(this, R.layout.item, cards);
 
@@ -46,31 +56,27 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-                //TODO:
-                // Are we doing something on the left?
-                // if not leave blank
                 Toast.makeText(MainActivity.this, "Left!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                //TODO:
-                // Add to 'liked' database here
-                // dataObject will be useful
-                Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
+
+                Card selected = (Card) dataObject;
+                db.insertRecipe(selected.getText(), selected.getImage(), selected.getIngredients(), selected.getDescription());
+
             }
 
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
-                //TODO:
-                // Ask for more data here
 
                 try {
-                    RecipeDTO x = RecipeDAO.getItem();
-                    cards.add(new Card(x.getName(), x.getImageUrl()));
+                    for (int i=0; i<1; i++) {
+                        cards.add(new Card(RecipeDAO.getItem()));
+                    }
                 } catch (Exception e) {
-                    System.out.println("NIE PYK PYK");
+                    System.out.println(e.getMessage());
                 }
 
                 cardAdapter.notifyDataSetChanged();
