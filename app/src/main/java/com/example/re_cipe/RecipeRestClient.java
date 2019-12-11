@@ -7,7 +7,7 @@ import cz.msebera.android.httpclient.Header;
 public class RecipeRestClient  {
 
     private static JSONObject result;
-    private static final String URL = "https://api.spoonacular.com/recipes/random?apiKey=627a441f172c42ba9d77f24e72fb2560";
+    private static final String URL = "https://api.spoonacular.com/recipes/random?apiKey=6aa23adc7bd747c6bbf0ad17eb204586";
 
     public static JSONObject load(){
         new SyncHttpClient().get(URL, new JsonHttpResponseHandler() {
