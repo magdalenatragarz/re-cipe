@@ -20,6 +20,12 @@ public class Card {
         this.description = description;
     }
 
+    public Card(String text, String image){
+        this.text = text;
+        this.image = image;
+    }
+
+
     public String getText() {
         return text;
     }
