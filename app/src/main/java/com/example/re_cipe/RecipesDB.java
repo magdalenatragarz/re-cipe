@@ -77,7 +77,7 @@ public class RecipesDB extends SQLiteOpenHelper{
         Cursor c = getAllRecipes();
 
         for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-            if(c.getString( c.getColumnIndex("name")) == name){
+            if(c.getString( c.getColumnIndex("name")).equals(name)){
                 return new Card( c.getString( c.getColumnIndex("name")), c.getString( c.getColumnIndex("image_url")), c.getString( c.getColumnIndex("content_url")), c.getString( c.getColumnIndex("description")));
             }
         }

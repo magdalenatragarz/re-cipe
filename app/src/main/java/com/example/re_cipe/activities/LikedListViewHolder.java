@@ -29,7 +29,7 @@ public class LikedListViewHolder extends RecyclerView.ViewHolder implements View
         Intent intent = new Intent(itemView.getContext(), LikedActivity.class);
         Bundle b = new Bundle();
         b.putString("liked_list_text", text.getText().toString());
-        intent.putExtras(b);
+        intent.putExtra("Bundle", b);
         view.getContext().startActivity(intent);
     }
 
