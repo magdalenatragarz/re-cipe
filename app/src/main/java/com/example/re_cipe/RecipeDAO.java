@@ -50,7 +50,7 @@ public class RecipeDAO {
         for (int i = 0; i < ingredients.length(); i++) {
             JSONObject ingredientObject = ingredients.getJSONObject(i);
             String ingredient = ingredientObject.getString("original");
-            ingredientsBuilder.append(ingredient).append( "/n");
+            ingredientsBuilder.append(ingredient).append( " \r\n ");
         }
         return ingredientsBuilder.toString();
     }
