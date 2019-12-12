@@ -10,6 +10,7 @@ public class RecipesDB extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "Recipes.db";
     public static final String TABLE_NAME = "favourites_table";
     public static final String ID = "recipe_id";
+    public static final String NAME = "name";
     public static final String IMAGE = "image_url";
     public static final String CONTENT = "content_url";
     public static final String DESCRIPTION = "description";
@@ -20,7 +21,7 @@ public class RecipesDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,image_url TEXT,content_url TEXT,description TEXT)");
+        db.execSQL("create table " + TABLE_NAME +" (recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,image_url TEXT,content_url TEXT,description TEXT)");
     }
 
     @Override
@@ -29,9 +30,10 @@ public class RecipesDB extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public boolean insertRecipe(String image, String content, String description) {
+    public boolean insertRecipe(String name, String image, String content, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(NAME, name);
         contentValues.put(IMAGE, image);
         contentValues.put(CONTENT, content);
         contentValues.put(DESCRIPTION, description);
@@ -48,9 +50,10 @@ public class RecipesDB extends SQLiteOpenHelper{
         return result;
     }
 
-    public boolean update(String id, String image, String content, String description) {
+    public boolean update(String id, String name, String image, String content, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(NAME, name);
         contentValues.put(ID, id);
         contentValues.put(IMAGE, image);
         contentValues.put(CONTENT, content);
