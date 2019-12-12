@@ -61,10 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onRightCardExit(Object dataObject) {
-
                 Card selected = (Card) dataObject;
                 db.insertRecipe(selected.getText(), selected.getImage(), selected.getIngredients(), selected.getDescription());
-
+                Log.d("LIST", "liked");
+                System.out.println("MAIN ACTIVITY");
+                System.out.println(db.getAllRecipes().getCount());
             }
 
 
