@@ -67,4 +67,21 @@ public class RecipesDB extends SQLiteOpenHelper{
         return db.delete(TABLE_NAME, "recipe_id = ?", new String[] {id});
     }
 
+    public void clearDatabase(String TABLE_NAME) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String clearDBQuery = "DELETE FROM "+TABLE_NAME;
+        db.execSQL(clearDBQuery);
+    }
+
+    public Card searchByName(String name){
+        Cursor c = getAllRecipes();
+
+        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            if(c.getString( c.getColumnIndex("name")) == name){
+                return new Card( c.getString( c.getColumnIndex("name")), c.getString( c.getColumnIndex("image_url")), c.getString( c.getColumnIndex("content_url")), c.getString( c.getColumnIndex("description")));
+            }
+        }
+        return new Card( "", "", "", "");
+    }
+
 }
